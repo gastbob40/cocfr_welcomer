@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw, ImageOps, ImageFont
 from images_creator.writter import write_text
 
 
-def get_image(username: str, image_url: str, number:int):
+def get_image(username: str, image_url: str, number: int):
     image = Image.new("RGB", (1000, 322))
     background = Image.open("backgrounds/banner.jpg")  # 25x25
 

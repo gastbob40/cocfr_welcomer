@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 
 import discord
 
+from Miscs.string_utility import get_similarity
 from images_creator.index import get_image
 
 client = discord.Client()
@@ -23,15 +24,17 @@ async def on_message(message):
 async def on_member_join(member: discord.Member):
     # A lot of checks
     with open('config.json', "r") as file:
+        await client.get_channel(377179445640822784).send('RAID EN COURS')
         data = json.load(file)
 
     # Check if the user is a banned user
-    if member.display_name in data['banned_users']:
-        return
+    for m in data['banned_users']:
+        if get_similarity(member.display_name, m) > 0.70:
+            return
 
     # Check if the user has joined the server during last 30 seconds
     now = datetime.now()
-    if member.display_name == data['last_user']['username']:
+    if get_similarity(member.display_name, data['last_user']['username']) > 0.70:
         last_time = datetime.strptime(data['last_user']['date'], '%Y-%m-%d %H:%M:%S.%f')
 
         if now - last_time < timedelta(seconds=30):
