@@ -36,7 +36,7 @@ async def on_member_join(member: discord.Member):
 
         if now - last_time < timedelta(seconds=30):
             data['banned_users'].append(member.display_name)
-            client.get_channel(377179445640822784).send('RAID EN COURS')
+            await client.get_channel(377179445640822784).send('RAID EN COURS')
             with open("config.json", "w") as file:
                 json.dump(data, file)
             return
