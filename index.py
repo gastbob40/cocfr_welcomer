@@ -24,12 +24,12 @@ async def on_message(message):
 async def on_member_join(member: discord.Member):
     # A lot of checks
     with open('config.json', "r") as file:
-        await client.get_channel(377179445640822784).send('RAID EN COURS')
         data = json.load(file)
 
     # Check if the user is a banned user
     for m in data['banned_users']:
         if get_similarity(member.display_name, m) > 0.70:
+            await client.get_channel(377179445640822784).send('RAID EN COURS')
             return
 
     # Check if the user has joined the server during last 30 seconds
