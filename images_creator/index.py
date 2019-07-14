@@ -31,12 +31,12 @@ def get_image(username: str, image_url: str, number: int):
     # Write on image
     text_written = ImageDraw.Draw(image)
     font = ImageFont.truetype("fonts/Museo 300.otf", 50)
-    #font = ImageFont.truetype("fonts/sans-serif.otf", 50)
+    # font = ImageFont.truetype("fonts/sans-serif.otf", 50)
     # font = ImageFont.truetype("fonts/coc.ttf", 40)
 
     write_text(text_written, 300, 90, f"{username}", font)
     write_text(text_written, 300, 150, "Bienvenue sur COC Français", font)
-    write_text(text_written, 300, 210, f"Tu es le {number} èmes clasheur", font)
+    write_text(text_written, 300, 210, f"Tu es le {format(number, ',').replace(',', ' ').replace('.', ',')} ème clasheur", font)
 
     fp = io.BytesIO()
     image.save(fp=fp, format="jpeg")
