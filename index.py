@@ -22,6 +22,11 @@ async def on_message(message):
 
 @client.event
 async def on_member_join(member: discord.Member):
+    # Check if we pass a miraculous number (1000)
+    number_of_member = len(member.guild.members)
+    if number_of_member % 1000 == 0:
+        await client.get_channel(377179445640822784).send(f'Nous sommes maintenant {number_of_member} clasheurs sur ce serveur ! 🌠🌠')
+
     # A lot of checks
     with open('config.json', "r") as file:
         data = json.load(file)
