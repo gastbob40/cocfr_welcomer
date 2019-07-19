@@ -37,11 +37,21 @@ async def on_member_join(member: discord.Member):
             await client.get_channel(377179445640822784).send(f'RAID EN COURS : {member.display_name}')
             return
 
-    # Check if the user has joined the server during last 30 seconds
     now = datetime.now()
-    if get_similarity(member.display_name, data['last_user']['username']) > 0.70:
-        last_time = datetime.strptime(data['last_user']['date'], '%Y-%m-%d %H:%M:%S.%f')
+    # Check if the users has joined the servers during last 5 seconds
+    last_time = datetime.strptime(data['last_user']['date'], '%Y-%m-%d %H:%M:%S.%f')
+    if now - last_time < timedelta(seconds=5):
+        await client.get_channel(377179445640822784).send(f'RAID EN COURS : {member.display_name}')
+        data['last_user']['username'] = member.display_name
+        data['last_user']['date'] = now.strftime('%Y-%m-%d %H:%M:%S.%f')
+        with open("config.json", "w") as file:
+            json.dump(data, file)
+        return
 
+
+    # Check if the user has joined the server during last 30 seconds (with the same pseudo)
+
+    if get_similarity(member.display_name, data['last_user']['username']) > 0.70:
         if now - last_time < timedelta(seconds=30):
             data['banned_users'].append(member.display_name)
             await client.get_channel(377179445640822784).send(f'RAID EN COURS : {member.display_name}')
