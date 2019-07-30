@@ -25,7 +25,8 @@ async def on_member_join(member: discord.Member):
     # Check if we pass a miraculous number (1000)
     number_of_member = len(member.guild.members)
     if number_of_member % 1000 == 0:
-        await client.get_channel(377179445640822784).send(f'Nous sommes maintenant {number_of_member} clasheurs sur ce serveur ! 🌠🌠')
+        await client.get_channel(377179445640822784).send(
+            f'Nous sommes maintenant {number_of_member} clasheurs sur ce serveur ! 🌠🌠')
 
     # A lot of checks
     with open('config.json', "r") as file:
@@ -48,9 +49,7 @@ async def on_member_join(member: discord.Member):
             json.dump(data, file)
         return
 
-
     # Check if the user has joined the server during last 30 seconds (with the same pseudo)
-
     if get_similarity(member.display_name, data['last_user']['username']) > 0.70:
         if now - last_time < timedelta(seconds=30):
             data['banned_users'].append(member.display_name)
@@ -75,9 +74,9 @@ async def on_member_join(member: discord.Member):
     fp = get_image(member.display_name, avatar_url, len(member.guild.members))
 
     content = f"<@{member.id}>, Bienvenue sur **Clash of Clans Français** <:COCFR:362270336437452800>\n\n" \
-        f"Afin de te familiariser avec le serveur tu n'as pas accès à tous les salons. Tu pourras faire de la pub ou du recrutement une fois que tu auras atteint le **level 5** <:barbar:408701460209991715> (Barbare)\n" \
-        f"Ce niveau est très rapide à atteindre <:Sortdevitesse:349829871859662848>\n\n" \
-        f"Pour plus d'infos tape **level** dans <#289476916044627978> et pense à lire les <#280735672527224842>."
+              f"Afin de te familiariser avec le serveur tu n'as pas accès à tous les salons. Tu pourras faire de la pub ou du recrutement une fois que tu auras atteint le **level 5** <:barbar:408701460209991715> (Barbare)\n" \
+              f"Ce niveau est très rapide à atteindre <:Sortdevitesse:349829871859662848>\n\n" \
+              f"Pour plus d'infos tape **level** dans <#289476916044627978> et pense à lire les <#280735672527224842>."
 
     await client.get_channel(278653494846685186).send(content=content, file=discord.File(fp=fp, filename="my_file.png"))
 
