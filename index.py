@@ -7,6 +7,7 @@ from Miscs.string_utility import get_similarity
 from images_creator.index import get_image
 
 client = discord.Client()
+raid_channel = 352546426108117002
 
 
 @client.event
@@ -35,14 +36,14 @@ async def on_member_join(member: discord.Member):
     # Check if the user is a banned user
     for m in data['banned_users']:
         if get_similarity(member.display_name, m) > 0.70:
-            await client.get_channel(377179445640822784).send(f'RAID EN COURS : {member.display_name}')
+            await client.get_channel(raid_channel).send(f'RAID EN COURS : {member.display_name}')
             return
 
     now = datetime.now()
     # Check if the users has joined the servers during last 5 seconds
     last_time = datetime.strptime(data['last_user']['date'], '%Y-%m-%d %H:%M:%S.%f')
     if now - last_time < timedelta(seconds=5):
-        await client.get_channel(377179445640822784).send(f'RAID EN COURS : {member.display_name}')
+        await client.get_channel(raid_channel).send(f'RAID EN COURS : {member.display_name}')
         data['last_user']['username'] = member.display_name
         data['last_user']['date'] = now.strftime('%Y-%m-%d %H:%M:%S.%f')
         with open("config.json", "w") as file:
@@ -53,7 +54,7 @@ async def on_member_join(member: discord.Member):
     if get_similarity(member.display_name, data['last_user']['username']) > 0.70:
         if now - last_time < timedelta(seconds=30):
             data['banned_users'].append(member.display_name)
-            await client.get_channel(377179445640822784).send(f'RAID EN COURS : {member.display_name}')
+            await client.get_channel(raid_channel).send(f'RAID EN COURS : {member.display_name}')
             with open("config.json", "w") as file:
                 json.dump(data, file)
             return
