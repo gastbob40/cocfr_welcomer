@@ -76,8 +76,8 @@ async def on_member_join(member: discord.Member):
 
     content = f"<@{member.id}>, Bienvenue sur **Clash of Clans Français** <:COCFR:362270336437452800>\n\n" \
               f"Afin de te familiariser avec le serveur tu n'as pas accès à tous les salons. Tu pourras faire de la " \
-              f"pub ou du recrutement une fois que tu auras atteint le **level 7** <:archer:408701960263303168> (" \
-              f"Archer)\n" \
+              f"pub ou du recrutement une fois que tu auras atteint le **level 5** <:barbar:408701460209991715> (" \
+              f"Barbar)\n" \
               f"Ce niveau est très rapide à atteindre <:Sortdevitesse:349829871859662848>\n\n" \
               f"Pour plus d'infos tape **level** dans <#289476916044627978> et pense à lire les <#280735672527224842>."
 
