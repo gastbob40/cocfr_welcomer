@@ -79,7 +79,7 @@ async def on_member_join(member: discord.Member):
               f"pub ou du recrutement une fois que tu auras atteint le **level 5** <:barbar:408701460209991715> (" \
               f"Barbar)\n" \
               f"Ce niveau est très rapide à atteindre <:Sortdevitesse:349829871859662848>\n\n" \
-              f"Pour plus d'infos tape **level** dans <#289476916044627978> et pense à lire les <#280735672527224842>."
+              f"Pour plus d'infos tape **!level** dans <#289476916044627978> et pense à lire les <#280735672527224842>."
 
     await client.get_channel(278653494846685186).send(content=content, file=discord.File(fp=fp, filename="my_file.png"))
 
